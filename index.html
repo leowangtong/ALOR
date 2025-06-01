@@ -264,7 +264,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <!-- <h2 class="title is-3">Results</h2> -->
-          <h3 class="title is-4">SWAT mitigates domain gaps and imbalanced distribution</h3>
+          <h3 class="title is-4">TFS achieves state-of-the-art AL performance</h3>
           <div class="content has-text-justified">
             <div class="item">
               <!-- Your image here -->
@@ -282,6 +282,53 @@
     </div>
   </section>
   <!-- End Prompt Inversion -->
+
+
+
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+
+        <div class="column is-four-fifths">
+          <h3 class="title is-4">CT consistently outperforms other adaptation approaches</h3>
+          <div class="content has-text-justified">
+            <img src="static/images/ct_is_better.png" alt="comparison with SOTA."
+                style="height: auto; display: block; margin: 10px;">
+              <p>
+                We run each combination of adaptation approach and AL method (without RDA) on the challenging Semi-Aves dataset for three random runs, 
+                and report the mean accuracy after Round-6. 
+                CT consistently outperforms other adaptation approaches regardless of what AL methods are used.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="section hero is-light3">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+
+        <div class="column is-four-fifths">
+          <h3 class="title is-4">Visualization of per-round (x-axis) per-class (y-axis) accuracies on semi-Aves benchmark</h3>
+          <div class="content has-text-justified">
+            <img src="static/images/visual_comparison_performance_v5.png" alt="comparison with SOTA."
+                style="height: auto; display: block; margin: 10px;">
+              <p>
+                For each method, we sort its per-class accuracies in round-0 and track the accuracies over time. 
+                Results of different methods with and without RDA are shown in the top and bottom rows, respectively. 
+                When adopting RDA, all AL methods suffer from learning for under-represented classes, which have limited retrieved data compared to common classes. 
+                However, it is worth noting that our TFS can quickly improve on the under-represented classes as it prioritizes sampling data for them 
+                (see the quick improvements of under-represented classes pointed by the black circle). 
+                Without RDA, all methods do not have notable patterns in accuracy change although they yield better accuracies than previous rounds. 
+                This suggests the benefit of RDA that indicates how to sample data to improve on underrepresented classes and eventually enhance overall accuracy.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
   <section class="section hero is-light">
     <div class="container is-max-desktop">
