@@ -119,31 +119,10 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Motivation</h2>
+            <h2 class="title is-3">Overview</h2>
             <div class="content has-text-justified">
               <p style="text-align: justify;">
-                <!-- Few-Shot Recognition (FSR) aims to train a classification model with only a few labeled
-                examples per concept provided by a downstream task. Inspired by the significant improvements
-                achieved by <b>retrieval-augmented learning (RAL)</b> in zero-shot recognition with Vision-Language Models
-                (VLMs, e.g., CLIP, OpenCLIP), we adapt a pretrained VLM and, for the first time, explore RAL for FSR
-                 by retrieving relevant images from VLMs' pretraining dataset (e.g., LAION). -->
-                 Few-Shot Recognition (FSR) aims to train a classification model with only a few labeled examples per concept
-                 concerned by a downstream task. With an <b>open-world philosophy</b>, we exploit Vision-Language Model (VLM, which
-                 is pretrained in the open world), and <b>open data</b> (e.g., the VLM's pretraining data) to facilitate few-shot learning.
-
-                <br>
-                <br>
-
-                <!-- Additionally, in contrast to prior FSR methods (prompt-learning or adapter-learning) that focus on parameter-efficient finetuning (PEFT), our work is motivated
-                by the <b>realistic data annotation application</b>, where we priortize accuracy over parameter efficiency. To this end,
-                we explore full-model finetuning using few-shot and retrieved data.
-                Through the process, we identify novel challenges and opportunities. -->
-
-                Furthermore, our few-shot recognition setup is motivated by <b>data annotation application</b>, where there are annotation
-                guidelines that provide a few visual examples for each concept concerned by the downstream task. Hence, we explore methods to
-                prioritize recognition accuracy without limiting to parameter-efficient finetuning (PEFT) such as prompt tuning or
-                adapter learning, both of which are popular few-shot learning methods. We explore methods as simple as full-model
-                finetuning over few-shot and/or retrieved data. Through the process, we identify novel challenges and opportunities.
+                In this work, we propose leveraging VLM’s pretraining data by retrieving samples closely related to the downstream task, using them to augment the task-specific data for AL. As expected, incorporating this data into existing AL methods leads to significant performance improvements. Given that our method exploits open-source VLM and open data, we refer to it as Active Learning with Open Resources (ALOR).
 
               </p>
             </div>
@@ -157,39 +136,33 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Overview of Findings</h2>
+            <h2 class="title is-3">Our Contributions</h2>
             <div class="content has-text-justified">
 
               <div class="item">
                 <!-- Your image here -->
-                <img src="static/images/sota_plots.png" alt="1" style="width: 500px; height: auto; display: block; margin: 0 auto;"/>
+                <img src="static/images/ALOR.png" alt="1" style="width: 500px; height: auto; display: block; margin: 0 auto;"/>
                 <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                  <!-- We retrieve relevent images from LAION  -->
-                  Over nine standard benchmark datasets, we show that:
+                  Our results reveal three major contributions: 
                   <ol>
                     <!-- <li><span style="color: orange;">finetuning on retrieved data</span> merely outperforms zero-shot methods due to domain gap and imbalanced distribution.</li> -->
-                    <li><span style="color: orange;">Finetuning a VLM on large amounts of retrieved data</span> barely
-                      surpasses state-of-the-art zero-shot methods due to the <b>domain gaps</b> of retrieved data
-                      compared to few-shot annotated data and its <b>imbalanced distribution</b> issues.</li>
-
-                    <li>Simply <span style="color: green;">finetuning a VLM on few-shot examples alone</span> significantly outperforms
-                      prior FSR methods (>3%), without suffering from overfitting issue. Moreover, finetuning on the mixed retrieved
-                      and few-shot data
-                      yields even better results.</li>
-
-                    <li>To mitigate <b>domain gaps</b> and <b>imbalanced distribution</b> issues, we propose a simple
-                      yet effective method:
-                      <span style="color: red;"><b>S</b>tage-<b>W</b>ise retrieval-<b>A</b>ugmented fine<b>T</b>uning (<b>SWAT</b>)</span>,
-                      resoundingly surpassing prior FSR methods by >6% in accuracy,
-                  with 20-30% accuracy improvements on challenging datasets such as Semi-Aves, Aircraft, EuroSAT (see details in the paper).
-                      <!-- which first
-                      end-to-end finetune on mixed retrieved and few-shot data and then retrain
-                      the classifier solely on the few-shot data. -->
+                    <li><span style="color: orange;">We study AL by embracing both a VLM and its pretraining data (instantiating the open data). 
+                    Particularly, we present <b>retrieval-based data augmentation (RDA)</b> to retrieve VLM’s pretraining data relevant to the 
+                      downstream task, greatly enhancing existing AL methods.</li>
+                    
+                    <li>We observe that the retrieved data follows imbalanced distributions, implying how the VLM is biased and how
+                    unlabeled task-specific data is similarly imbalanced distributed. This insight motivates our simple yet
+                    novel <b>Tail First Sampling (TFS)</b> strategy that prioritizes rare classes in data selection. 
+                    Extensive experiments show that TFS outperforms prior AL methods.</li>
+                      
+                    <li>We rigorously compare different VLM adaptation approaches including finetuning (FT), contrastive tuning (CT), 
+                    linear probing (LP) and prompt tuning (PT). We show that CT significantly outperforms the others, 
+                    even when retrieved data is not used. Our final method (<b>ALOR</b>) assembles CT, RDA and TFS, 
+                    achieving the state-of-the-art on five benchmarks.
                     </li>
+
                   </ol>
 
-                  <!-- Over nine standard benchmark datasets, SWAT resoundingly outperforms prior FSR methods by >6% in accuracy, -->
-                  <!-- with 20-30% accuracy improvements on challenging datasets such as Semi-Aves, Aircraft, EuroSAT. -->
                 </p>
               </div>
 
@@ -201,46 +174,6 @@
 
 
     <!-- End paper overview -->
-
-  <!-- Paper abstract -->
-  <!-- <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p style="text-align: justify;">
-              Few-shot recognition aims to train a classification model with only
-              a few labeled examples of pre-defined concepts, where annotation can
-              be costly in a downstream task. In another related research area,
-              zero-shot recognition, which assumes no access to any downstream-task
-              data, has been greatly advanced by using pretrained Vision-Language
-              Models (VLMs). In this area, retrieval-augmented learning (RAL)
-              effectively boosts zero-shot accuracy by retrieving and learning from
-              external data relevant to downstream concepts. Motivated by these
-              advancements, our work explores RAL for few-shot recognition.
-              While seemingly straightforward despite being under-explored in the
-              literature (till now!), we present novel challenges and opportunities
-              for applying RAL for few-shot recognition. First, perhaps surprisingly,
-              simply finetuning the VLM on a large amount of retrieved data barely
-              surpasses state-of-the-art zero-shot methods due to the imbalanced
-              distribution of retrieved data and its domain gaps compared to few-shot
-              annotated data. Second, finetuning a VLM on few-shot examples alone
-              significantly outperforms prior methods, and finetuning on the mix of
-              retrieved and few-shot data yields even better results. Third, to
-              mitigate the imbalanced distribution and domain gap issue, we propose
-              Stage-Wise Augmented fineTuning (SWAT) method, which involves end-to-end
-              finetuning on mixed data for the first stage and retraining the
-              classifier solely on the few-shot data in the second stage. Extensive
-              experiments show that SWAT achieves the best performance on standard
-              benchmark datasets, resoundingly outperforming prior works by ~10% in
-              accuracy.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <!-- End paper abstract -->
 
 
 
