@@ -145,8 +145,7 @@
                 <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
                   Our results reveal three major contributions: 
                   <ol>
-                    <!-- <li><span style="color: orange;">finetuning on retrieved data</span> merely outperforms zero-shot methods due to domain gap and imbalanced distribution.</li> -->
-                    <li><span style="color: orange;">We study AL by embracing both a VLM and its pretraining data (instantiating the open data). 
+                   <li>We study AL by embracing both a VLM and its pretraining data (instantiating the open data). 
                     Particularly, we present <b>retrieval-based data augmentation (RDA)</b> to retrieve VLM’s pretraining data relevant to the 
                       downstream task, greatly enhancing existing AL methods.</li>
                     
@@ -241,17 +240,14 @@
 
         <div class="column is-four-fifths">
           <h2 class="title is-3">Results</h2>
-          <h3 class="title is-4">SWAT achieves state-of-the-art FSR performance</h3>
+          <h3 class="title is-4">RDA significantly boosts active learning methods</h3>
           <div class="content has-text-justified">
-            <img src="static/images/sota.png" alt="comparison with SOTA."
+            <img src="static/images/compare_rda_2D_barchart_v4.png" alt="comparison with SOTA."
                 style="height: auto; display: block; margin: 10px;">
               <p>
-                Remarkably, we show that:
-                <ul>
-                  <li>Few-shot finetuning already outperfroms previous FSR methods by >3%, without overfitting.</li>
-                  <li>SWAT largely outperforms existing zero-shot and few-shot methods by >6%.</li>
-                </ul>
-                We mark the accuracy improvements over previous SOTA FSR method <a href="https://arxiv.org/abs/2312.12730" style="color: #3273dc;">CLAP</a> in <span style="color: green;">superscripts</span>.
+                For each method in each round, we report the averaged accuracy and standard deviation over three random 
+                runs across five datasets. In Round-0, methods with RDA achieve 1.7× higher accuracy than without! 
+                In the last round (Round-6), RDA helps each method obtain >8% accuracy gains
               </p>
           </div>
         </div>
@@ -272,24 +268,11 @@
           <div class="content has-text-justified">
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/stagewise_training.png" alt="1" style="width: 2000px; height: auto; display: block; margin: 0 auto;"/>
+              <img src="static/images/sota.png" alt="1" style="width: 2000px; height: auto; display: block; margin: 0 auto;"/>
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                <!-- Compareing SWAT -->
-                <ul>
-                  <li>When fintuning on retrieved data only for the first stage, retraining classifier on few-shot data yields significant improvement on
-                    both common and rare class accuracies, confirming SWAT mitigates domain gaps.</li>
-                  <li>
-                    Across all stage-1 training scenarios, stage-2 training improves rare classes much more than the common classes, validating the mitigation
-                    of imbalanced learning.
-                  </li>
-                  <!-- Across different finetuning scenario in stage 1, SWAT effectively improves the recognition
-                  accuracy on both common and rare classes (least frequent 10%). The improvement on the rare
-                  classes is more significant than the common classes, confirming that SWAT mitigates the
-                  imbalanced learning.  -->
-                </ul>
-                  We mark the accuracy improvements over stage-1 model in
-                  <span style="color: green;">superscripts</span> and standard deviation across three different
-                  runs in <span style="color: grey;">subscripts</span>.
+                Results show that our TFS outperforms existing AL methods when using PT for VLM adaptation. 
+                Moreover, as our final ALOR method, “TFS w/ CT” (with RDA) significantly boosts performance, 
+                achieving ∼7 points gains (in both accuracy and macro F1 averaged on the five datasets) over “TFS w/ PT” and existing AL methods.
               </p>
             </div>
 
