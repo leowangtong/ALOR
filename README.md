@@ -3,7 +3,7 @@
 </div>
 
 In this work, we propose leveraging VLM's pretraining data by retrieving samples closely related to the downstream task, using them to augment the task-specific data for AL. As expected, incorporating this data into existing AL methods leads to significant performance improvements.
-Given that our method exploits open-source VLM and open data, we refer to it as ${Active Learning with Open Resources (ALOR)}$.
+Given that our method exploits open-source VLM and open data, we refer to it as $Active Learning with Open Resources (ALOR)$.
 
 Further analysis of retrieved data reveals a naturally imbalanced distribution of task-relevant classes, exposing inherent biases within the VLM. This insight motivates our novel ${Tail First Sampling (TFS)}$ strategy for AL, an embarrassingly simple yet effective method that prioritizes sampling data from underrepresented classes to label.
 
