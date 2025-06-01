@@ -149,7 +149,7 @@
 
               <div class="item">
                 <!-- Your image here -->
-                <img src="static/images/ALOR.png" alt="1" style="width: 500px; height: auto; display: block; margin: 0 auto;"/>
+                <img src="static/images/compare_al_acc_v7.png" alt="1" style="width: 500px; height: auto; display: block; margin: 0 auto;"/>
                 <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
                   Our results reveal three major contributions: 
                   <ol>
@@ -188,19 +188,18 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Challenges</h2>
-          <h3 class="title is-4">Retrieved data has domain gaps and follows an imbalanced distribution, degrading finetuning performance</h3>
+          <h2 class="title is-3">Active Learning with Open Resources (ALOR)</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/challenges.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/>
+              <img src="static/images/ALOR.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/>
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                Left: we show that the retrieved data exhibits different visual patterns
-                (styles, backgrounds, resolutions, semantics, etc.) compared to the downstream few-shot data.
-                Right: the retrieved data follows an imbalanced distribution, where some classes
-                naturally appear less frequently than others. We retrieve relevant images from <a href="https://laion.ai/blog/laion-400-open-dataset/" style="color: #3273dc;">LAION</a>
-                dataset following <a href="https://shubhamprshr27.github.io/neglected-tails-of-vlms/"  style="color: #3273dc;">REAL</a>.
+                Active Learning with Open Resources (ALOR) exploits open-source VLM and open data (especially VLM’s pretraining data), 
+                unlike recent AL methods which use only the former. Specifically, for task-specific class names, 
+                ALOR retrieves relevant pretraining data to augment the limited number of task-specific labeled data. 
+                The retrieved data not only reveals an imbalanced distribution but also unveils how the VLM is biased and how task-specific unlabeled data is (similarly) imbalanced. 
+                Leveraging these insights, ALOR adopts Tail First Sampling (TFS) that prioritizes sampling unlabeled examples data from underrepresented classes to label.
               </p>
             </div>
 
@@ -216,23 +215,17 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Solution</h2>
-          <h3 class="title is-4">Stage-Wise retrieval-Augmented fineTuning (SWAT)</h3>
+          <h2 class="title is-3">Tail First Sampling (TFS)</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/swat.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/>
+              <img src="static/images/TFS_illustration_v5.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/>
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                Given a data annotation guideline consisting of few-shot annotated images,
-                SWAT retrieves <b>open data</b> relevant to the downstream concepts (e.g., from VLM's pretraining dataset <a href="https://laion.ai/blog/laion-400-open-dataset/">LAION</a>),
-                and then finetunes a pretrained VLM (e.g., <a href="https://github.com/mlfoundations/open_clip?tab=readme-ov-file">OpenCLIP</a>) following a stage-wise strategy:
-                <ul>
-                  <li>Stage 1: end-to-end finetuning on the mixed retrieved and few-shot data.</li>
-                  <li>Stage 2: retraining the classifier solely on the balanced few-shot images.</li>
-                </ul>
-                SWAT effectively mitigates the domain gaps and imbalanced distribution of retrieved data,
-                significantly outperforming previous FSR methods, as shown below.
+               Tail First Sampling (TFS) utilizes the data distribution computed in the retrieved data to sample unlabeled data 
+                for the most under-represented class. Specifically, it first identifies this class over the current set of labeled data 
+                (including retrieved examples). Then, it finds the unlabeled examples classified as this classes. 
+                From this set, it selects the example that has the highest uncertainty of its prediction, e.g., the largest entropy.
               </p>
             </div>
           </div>
