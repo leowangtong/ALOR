@@ -28,7 +28,7 @@ data/
     |–– retrieved_data/
 ```
 
-Below we provide instructions to prepare the downstream datasets used in our experiments. Please refer to [RETRIEVAL.md](https://github.com/tian1327/SWAT/blob/master/retrieval/RETRIEVAL.md) for instructions on how to setting up the retrieved datasets.
+Below we provide instructions to prepare the downstream datasets used in our experiments. Please refer to [RETRIEVAL.md](https://github.com/tian1327/SWAT/blob/master/retrieval/RETRIEVAL.md) for instructions on how to set up the retrieved datasets and put the retrieved data into data/[semi_aves, aircraft, oxford_pets, stanford_cars, food101]/retrieved_data/
 
 Datasets list:
 
